@@ -5,15 +5,23 @@ import pandas as pd
 
 
 def get_all_filenames():
-    # this function should return a list of filenames
-    # you should look at glob library
-    # Example: it should return ["raw_data_1686027160.json", "raw_data_1686027165.json", "raw_data_1686027170.json"]
-    pass
+    files = glob.glob("raw_data_*.json")
+    return files
 
 def transform_one_file(filename):
-    # this function should return a list of dictionaries
-    # each dictionnary should look like that: { "city": city, "latitude": latitude, "longitude": longitude , "temperature": tempature, "time": time}
-    pass
+    output = []
+    with open(filename, "r") as f:
+        data = json.load(f)
+        for city, d in data.items():
+            res = {
+                "city": city,
+                "latitude": d["latitude"],
+                "longitude": d["longitude"],
+                "temperature": d["current_weather"]["temperature"],
+                "time": d["current_weather"]["time"]
+            }
+            output.append(res)
+    return output
 
 def merge_all_files_in_pandas_df(files):
     output = []
@@ -24,8 +32,7 @@ def merge_all_files_in_pandas_df(files):
     return df
 
 def drop_duplicates(df_):
-    # drop duplicated rows using a function of pandas.DataFrame
-    pass
+    return df_.drop_duplicates()
 
 def main():
     files = get_all_filenames()
