@@ -41,4 +41,5 @@ def main():
     df.to_csv("transformed_data.csv", index=False)
 
 
-main()
+if __name__ == "__main__":
+    main()

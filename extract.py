@@ -47,4 +47,6 @@ def main():
     weather_data = get_weather_all_cities(cities)
     save_output_data(weather_data)
 
-main()
+
+if __name__ == "__main__":
+    main()

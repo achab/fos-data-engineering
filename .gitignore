@@ -1,0 +1,4 @@
+raw_data*.json
+transformed_data.csv
+index.html
+__pycache__
